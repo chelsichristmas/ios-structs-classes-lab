@@ -24,8 +24,20 @@ fred.name = "Brick"
 fred.weight = 999.2
 fred.homePlanet = "Mars"
 ```
+Answer: 
+```
+```
+It will not run because the property homePlanet, in class Giant, is a "let" constant which means it is immutable.
 
 Fix the class definition for `Giant` in the space below so that it **does** work:
+class Giant {
+ var name: String = "Fred"
+ var weight: Double = 340.0
+ var homePlanet: String = "Earth"
+}
+
+let fred = Giant()
+
 
 
 ## Question 2
@@ -48,9 +60,11 @@ bilbo.name = "Jake"
 bilbo.height = 1.42
 bilbo.homePlanet = "Saturn"
 ```
+Answer: 
+It will not run because bilbo is a constant.
 
 Change the declaration of `bilbo` so that the above three lines of code **do** work:
-
+var bilbo = Alien(name: "Bilbo", height: 1.67, homePlanet: "Venus")
 
 ## Question 3
 
@@ -64,6 +78,8 @@ jason.name = "Jason"
 ```
 
 What will the value of `edgar.name` be after those three lines of code are run? What will the value of `jason.name` be? Why?
+
+The value of edgar.name is "edgar" but the value of jason.name is "Jason". each variable is of the class Giant. Creating an instance of Giant means that the first variable will take on the values of the constant/variable that it's set equal to afterwards.
 
 
 ## Question 4
