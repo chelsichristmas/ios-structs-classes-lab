@@ -79,7 +79,7 @@ jason.name = "Jason"
 
 What will the value of `edgar.name` be after those three lines of code are run? What will the value of `jason.name` be? Why?
 
-The value of edgar.name is "edgar" but the value of jason.name is "Jason". each variable is of the class Giant. Creating an instance of Giant means that the first variable will take on the values of the constant/variable that it's set equal to afterwards.
+The value of edgar.name will be Jason. Both jason and edgar are from of the class Giant and certain changes made to instances of classes are inhereted by other instances of the same property.
 
 
 ## Question 4
@@ -93,7 +93,7 @@ charlesFromJupiter.homePlanet = "Jupiter"
 ```
 
 What will the value of `charles.homePlanet` be after the above code run? What about the value of `charlesFromJupiter.homePlanet`? Why?
-
+The value of charles.homePlanet will be Pluto because its from a struct and structs properties can not be changed/mutated by instances outside of it.
 
 ## Question 5
 
@@ -116,7 +116,22 @@ struct BankAccount {
 
 Does this code work? Why or why not?
 
+The code does not work because unless a function within a struct has been labeled mutating, it is incapable of mutating the properties within the struct.
+
 Fix the `BankAccount` struct so it does work.
+
+struct BankAccount {
+ var owner: String
+ var balance: Double
+
+ mutating func deposit(_ amount: Double) {
+ balance += amount
+ }
+
+ mutating func withdraw(_ amount: Double) {
+ balance -= amount
+ }
+}
 
 Given the code below (which should incorporate any fixes you made):
 
@@ -128,21 +143,78 @@ joeAccount.withdraw(50.0)
 
 What will the value of `joeAccount.balance` be after the above code runs? What about the value of `joeOtherAccount.balance`? Why?
 
+The value of joeAccount.balance will be 50.0 and the value of joeOtherAccount will be 100.0 because, unlike classes, instances of structs do not inheret (take on) the changes that have been made to other instances of the same property of the struct.
+
 
 ## Question 6
 
 a. Write a struct called `Person` that has 3 properties of type `String`: a first name, a last name and a middle name. Have the middle name be optional. Create 2 instances of a `Person`, one with a middle name and one without. Print one of their first names.
 
+struct Person {
+    var firstName: String
+    var middleName: String?
+    var lastName: String
+}
+
+var chelsi = Person(firstName: "Chelsi", middleName: "Shanice", lastName: "Christmas")
+var bo = Person(firstName: "Rafael", lastName: "Carrion")
 
 b. Write a method in `Person` called `fullName` that will return a formatted string of an instance's full name. Call this method on both the instances you created in part a.
+
+Answer: 
+struct Person {
+    var firstName: String
+    var middleName: String?
+    var lastName: String
+    mutating func fullName() -> String {
+        let fullName = firstName + " " + (middleName ?? "no middle name") + " " + lastName
+        return fullName
+    }
+}
+
+var chelsi = Person(firstName: "Chelsi", middleName: "Shanice", lastName: "Christmas")
+var bo = Person(firstName: "Rafael", lastName: "Carrion")
+
+print(chelsi.fullName())
+
 
 
 ## Question 7
 
 a. Create a struct called `Book` that has properties `title`, `author` and `rating`, of type `String`, `String`, and `Double` respectively. Create some instances of `Book`.
 
+struct Book {
+    var title: String
+    var author: String
+    var rating: Double
+    
+}
+
+var twilight = Book(title: "Twilight", author: "Stephenie Meyers", rating: 7.2)
+
+var catcherInTheRye = Book(title: "Catcher In The Rye", author: "J.D. Salinger", rating: 7.6)
+
 
 b. Add a method to `Book` called `isGood` that returns `true` if its rating is greater than or equal to 7
+
+struct Book {
+    var title: String
+    var author: String
+    var rating: Double
+    func isGood() -> Bool{
+        var goodBook = true
+        let goodRating: Double = 7.0
+        if rating > goodRating  {
+            goodBook = true "
+            {"
+        } else {
+            goodBook = false
+        }
+       return goodBook
+    }
+    
+    
+}
 
 
 ## Question 8
@@ -209,6 +281,37 @@ print(dog4.toString())
 
 e. Add a type property called `count` that keeps track of how many dogs have been created so far.
 
+
+Answer:
+class Dog {
+    var name = "dog"
+    var breed = "unknown"
+    var mood = "calm"
+    var hungry = false
+    static var dogCount: Int = 0
+    
+    init()
+    {Dog.dogCount += 1 }
+    
+    func playFetch() {
+        hungry = true
+        mood = "playful"
+        print("Ruff")
+    }
+    
+    func feed() {
+        if hungry == true {
+        hungry = false
+        print("Woof")
+        } else {
+            print("The dog doesn't look hungry.")
+        }
+    }
+    
+    func toString() {
+        print(" Name: \(name) \n Breed: \(breed) \n Mood: \(mood)")
+    }
+}
 //Ex: There have been four dogs created so far
 `Dog.count //returns 4`
 
@@ -235,6 +338,30 @@ tenDegreesCelsius.getFahrenheitTemp() //returns 50.0
 
 c. Give the `Celsius` struct a method called `isBelowFreezing` that returns a `Bool` (true if the temperature is below freezing).
 
+Answer:
+struct FreezingPoint {
+    static let celsius: Double = 0
+    static let farenheit: Double = 32
+    static let kelvin: Double = 273.15
+    
+    
+}
+
+struct Celsius {
+    var celsius: Double
+    
+    func getFarhenheitTemp() -> Double {
+        var temp: Double = 0
+        temp = ( celsius * 1.8 ) + 32
+        return temp
+    }
+    
+    func getKelvinTemp() -> Double {
+        var temp: Double = 0
+        temp = celsius + 273
+        return temp
+    }
+}
 
 ## Question 10
 
